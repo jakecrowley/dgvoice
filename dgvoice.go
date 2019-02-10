@@ -102,6 +102,10 @@ func ReceivePCM(v *discordgo.VoiceConnection, c chan *discordgo.Packet) {
 	}
 
 	var err error
+	
+	silence := make([]int16, 1)
+	c <- &discordgo.Packet{PCM: silence}
+	c <- &discordgo.Packet{PCM: silence}
 
 	for {
 		if v.Ready == false || v.OpusRecv == nil {
